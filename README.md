@@ -106,7 +106,7 @@ Buka di browser: http://127.0.0.1:8000
 
 ## 🔐 Role Akses
 
-| Role  | Keterangan                            |
-| ----- | ------------------------------------- |
-| admin | akses penuh (dashboard, produk, user) |
-| user  | hanya melihat data produk             |
+| Role  | Keterangan                            | Email              | Password |
+| ----- | ------------------------------------- | ------------------ | -------- |
+| admin | akses penuh (dashboard, produk, user) | admin123@gmail.com | admin123 |
+| user  | hanya melihat data produk             | user123@gmail.com  | user123  |
