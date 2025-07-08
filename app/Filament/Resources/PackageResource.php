@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class PackageResource extends Resource
 {
@@ -24,6 +25,17 @@ class PackageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document';
     protected static ?string $navigationLabel = 'Paket';
+
+    public static function canCreate(): bool
+    {
+        return Auth::user()?->hasRole('admin');
+    }
+
+    // Kalau pakai Bulk delete
+    public static function canDeleteAny(): bool
+    {
+        return Auth::user()?->hasRole('admin');
+    }
 
     public static function form(Form $form): Form
     {
@@ -61,9 +73,9 @@ class PackageResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ViewAction::make()->visible(fn(Package $record): bool => Auth::user()->hasRole('admin')),
+                Tables\Actions\EditAction::make()->visible(fn(Package $record): bool => Auth::user()->hasRole('admin')),
+                Tables\Actions\DeleteAction::make()->visible(fn(Package $record): bool => Auth::user()->hasRole('admin')),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

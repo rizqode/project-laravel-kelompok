@@ -10,6 +10,11 @@ class EditPackage extends EditRecord
 {
     protected static string $resource = PackageResource::class;
 
+    public static function canAccess(array $parameters = []): bool
+    {
+        return auth()->user()?->hasRole('admin');
+    }
+
     protected function getHeaderActions(): array
     {
         return [
