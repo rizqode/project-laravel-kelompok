@@ -7,7 +7,7 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-# 🧾 Project Laravel Kelompok – Aplikasi Informasi Pasien RSJ
+# 🧾 Project Laravel Kelompok – Aplikasi Studio Foto
 
 Aplikasi Studio Foto adalah sistem manajemen layanan foto studio berbasis web yang mempermudah pengelolaan paket foto dan data pemesanan secara efisien. Aplikasi ini dibangun dengan **Laravel** dan **Filament**, serta menerapkan manajemen akses berbasis role (`admin` dan `user`).
 
@@ -30,10 +30,10 @@ Sebelum menjalankan proyek ini, pastikan sistem kamu telah memiliki:
 
 | Nama Anggota            | Fitur yang Dikerjakan                                                               |
 | ----------------------- | ----------------------------------------------------------------------------------- |
-| Dinna Nurcahyani Hendra | Setup kerangka Laravel                                                              |
-| Fathia Nisa Azzahra     | Fitur autentikasi (login & register)                                                |
-| Nabila Salwa Meliyani   | CRUD Produk (tambah, edit, hapus, lihat), upload gambar ke storage, DataTables Ajax |
-| Icha Noviyana           | Dashboard admin dan user, pembatasan akses halaman berdasarkan role pengguna        |
+| Muhammad Rizqi          | Setup kerangka Laravel                                                              |
+| Pasha Herdiansyah       | Fitur autentikasi (login & register)                                                |
+| Denis Nasrul Syam       | CRUD Produk (tambah, edit, hapus, lihat), upload gambar ke storage, DataTables Ajax |
+| Nadhira putri dwicahyani           | Dashboard admin dan user, pembatasan akses halaman berdasarkan role pengguna        |
 
 ---
 
@@ -72,7 +72,7 @@ APP_URL=http://127.0.0.1:8000
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=db_rsj
+DB_DATABASE=db_studiofoto
 DB_USERNAME=root
 DB_PASSWORD=
 
