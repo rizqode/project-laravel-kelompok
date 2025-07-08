@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 
 class BookingResource extends Resource
 {
@@ -24,6 +25,11 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationLabel = 'Booking';
+
+    public static function canAccess(): bool
+    {
+        return Auth::check() && Auth::user()->hasRole('admin');
+    }
 
     public static function form(Form $form): Form
     {
