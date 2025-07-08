@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bookings', function (Blueprint $table) {
+        Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->string('kontak');
-            $table->string('paket');
-            $table->date('tanggal');
+            $table->string('email');
+            $table->enum('layanan', ['Foto keluarga', 'Foto wisuda', 'Pas foto', 'Foto pernikahan', 'Foto anak', 'Foto personal']);
             $table->text('catatan')->nullable();
-            $table->string('kode')->unique();
-            $table->string('status')->default('Pending');
-            $table->date('tanggal_booking');
-            $table->string('bukti_transfer')->nullable();
             $table->timestamps();
         });
     }
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('contacts');
     }
 };

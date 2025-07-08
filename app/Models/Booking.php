@@ -7,15 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = [
-        'customer_name',
-        'phone_number',
-        'booking_date',
-        'package_id',
+        'nama',
+        'kontak',
+        'paket',
+        'tanggal',
+        'catatan',
+        'kode',
         'status',
-        'payment_status',
+        'tanggal_booking',
+        'bukti_transfer'
     ];
-    public function package()
-    {
-        return $this->belongsTo(Package::class);
-    }
 }

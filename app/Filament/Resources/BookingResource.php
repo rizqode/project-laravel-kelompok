@@ -6,7 +6,6 @@ use App\Filament\Resources\BookingResource\Pages;
 use App\Filament\Resources\BookingResource\RelationManagers;
 use App\Models\Booking;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -17,7 +16,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Illuminate\Support\Facades\Auth;
 
 class BookingResource extends Resource
 {
@@ -25,35 +23,23 @@ class BookingResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-book-open';
     protected static ?string $navigationLabel = 'Booking';
+    protected static ?string $pluralLabel = 'Booking';
 
-    public static function canAccess(): bool
-    {
-        return Auth::check() && Auth::user()->hasRole('admin');
-    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make()
-                    ->schema([
-                        TextInput::make('customer_name')->required()->label('Nama')->prefixIcon('heroicon-o-user-circle'),
-                        TextInput::make('phone_number')->required()->label('Nomor Telepon')->numeric()->prefixIcon('heroicon-o-phone'),
-                        DatePicker::make('booking_date')->required()->label('Tanggal Booking')->default(now())->prefixIcon('heroicon-o-calendar'),
-                        Select::make('package_id')->relationship('package', 'name')->required()->label('Paket')->prefixIcon('heroicon-o-tag'),
-                        Select::make('status')->options([
-                            'pending' => 'Pending',
-                            'selesai' => 'Selesai',
-                            'batal' => 'Batal',
-                        ])->required()->label('Status')->prefixIcon('heroicon-o-check-circle'),
-                        Select::make('payment_status')->options([
-                            'belum_lunas' => 'Belum Lunas',
-                            'dp' => 'DP',
-                            'lunas' => 'Lunas',
-                        ])->required()->label('Status Pembayaran')->prefixIcon('heroicon-o-banknotes'),
-
+                TextInput::make('nama')->required(),
+                TextInput::make('email')->email()->required(),
+                DatePicker::make('tanggal_booking')->required()->default(now()),
+                Select::make('status')
+                    ->options([
+                        'Menunggu' => 'Menunggu',
+                        'Disetujui' => 'Disetujui',
+                        'Ditolak' => 'Ditolak',
                     ])
-                    ->columns(2),
+                    ->default('Menunggu'),
             ]);
     }
 
@@ -61,28 +47,12 @@ class BookingResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('customer_name')->label('Nama')->searchable()->sortable(),
-                TextColumn::make('phone_number')->label('Nomor Telepon')->searchable()->sortable(),
-                TextColumn::make('booking_date')->label('Tanggal Booking')->searchable()->sortable(),
-                TextColumn::make('package.name')->label('Paket')->searchable()->sortable(),
-                TextColumn::make('status')->label('Status')->searchable()->sortable()
-                    ->formatStateUsing(function (string $state): string {
-                        return match ($state) {
-                            'pending' => 'PEending',
-                            'selesai' => 'Selesai',
-                            'batal' => 'Batal',
-                            default => $state,
-                        };
-                    }),
-                TextColumn::make('payment_status')->label('Status Pembayaran')->searchable()->sortable()
-                    ->formatStateUsing(function (string $state): string {
-                        return match ($state) {
-                            'belum_lunas' => 'Belum Lunas',
-                            'dp' => 'DP',
-                            'lunas' => 'Lunas',
-                            default => $state,
-                        };
-                    }),
+                TextColumn::make('nama')->searchable(),
+                TextColumn::make('email'),
+                TextColumn::make('category.nama_paket')->label('Paket'),
+                TextColumn::make('tanggal_booking')->label('Tanggal Booking')->date(),
+                TextColumn::make('status')->badge(),
+                TextColumn::make('created_at')->label('Dibuat')->since(),
             ])
             ->filters([
                 //
