@@ -44,7 +44,7 @@ Sebelum menjalankan proyek ini, pastikan sistem kamu telah memiliki:
 Buka software **GIT** lalu jalankan perintah berikut:
 
 ```bash
-git clone https://github.com/Dina-Nurcahyani/project-laravel-kelompok.git
+git clone https://github.com/rizqode/project-laravel-kelompok.git
 
 cd project-laravel-kelompok
 ```
