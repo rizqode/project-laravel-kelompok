@@ -26,8 +26,8 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
-            ->path('/')
-            ->brandName('Studio Foto')
+            ->path('/admin')
+            ->brandName('Lentera Studio Foto')
             ->login()
             ->colors([
                 'primary' => Color::Amber,
