@@ -6,6 +6,7 @@ use App\Filament\Resources\PaketResource\Pages;
 use App\Filament\Resources\PaketResource\RelationManagers;
 use App\Models\Paket;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -29,9 +30,12 @@ class PaketResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->label('Nama Paket')
                     ->required(),
+                Select::make('categori_id')
+                    ->label('Kategori')
+                    ->relationship('categori', 'nama')
+                    ->required(),
                 Forms\Components\Textarea::make('deskripsi')
-                    ->label('Deskripsi Paket')
-                    ->rows(4),
+                    ->label('Deskripsi Paket'),
                 Forms\Components\TextInput::make('harga')
                     ->numeric()
                     ->prefix('Rp')

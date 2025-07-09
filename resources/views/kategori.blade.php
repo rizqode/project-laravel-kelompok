@@ -79,7 +79,7 @@
 
                 @foreach ($categories as $category)
                     <div class="card">
-                        <a href="{{ url('detail') }}">
+                        <a href="{{ url(Str::slug($category->nama)) }}">
                             <img src="{{ asset('storage/' . $category->foto_path) }}" alt="{{ $category->nama }}">
                         </a>
                         <div class="card-info">
