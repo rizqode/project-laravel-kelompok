@@ -47,11 +47,10 @@ Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
 
 Route::get('{slug}', function ($slug) {
-    $category = Categori::with('paketFotos')
-        ->get()
+    $category = Categori::with(['paketFotos'])->get()
         ->first(fn($cat) => Str::slug($cat->nama) === $slug);
 
     if (!$category) abort(404);
 
-    return view($slug, compact('category'));
+    return view('detail', compact('category'));
 })->name('detail.kategori');
