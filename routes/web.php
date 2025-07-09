@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
+use App\Models\Categori;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 
 Route::get('/kategori', function () {
     return view('kategori');
@@ -43,3 +45,13 @@ Route::get('/riwayat', function () {
 
 Route::get('/contact', fn() => view('contact'))->name('contact');
 Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+
+Route::get('{slug}', function ($slug) {
+    $category = Categori::with('paketFotos')
+        ->get()
+        ->first(fn($cat) => Str::slug($cat->nama) === $slug);
+
+    if (!$category) abort(404);
+
+    return view($slug, compact('category'));
+})->name('detail.kategori');

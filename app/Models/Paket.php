@@ -12,6 +12,17 @@ class Paket extends Model
         'durasi',
         'fasilitas',
         'deskripsi',
-        'gambar'
+        'foto',
+        'categori_id',
     ];
+
+    public function categori()
+    {
+        return $this->belongsTo(Categori::class, 'categori_id');
+    }
+
+    public function fotos()
+    {
+        return $this->hasMany(PaketFoto::class);
+    }
 }

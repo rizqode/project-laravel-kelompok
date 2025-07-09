@@ -10,6 +10,6 @@ class Categori extends Model
 
     public function paketFotos()
     {
-        return $this->hasMany(Paket::class, 'kategori_id');
+        return $this->hasMany(Paket::class, 'categori_id');
     }
 }
